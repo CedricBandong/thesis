@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Be My Valentine</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <audio id="bgMusic" loop autoplay preload="auto" playsinline>
+      <source src="bgm.mp3" type="audio/mpeg" />
+    </audio>
+    <button class="music-overlay" id="musicOverlay" type="button">
+      Tap to start the music
+    </button>
+    <main class="card" id="card">
+      <section class="panel panel-question" id="panelQuestion">
+        <div class="heart" aria-hidden="true"></div>
+        <h1>Can you be my valentine?</h1>
+        <p>You make every day feel special.</p>
+        <div class="buttons">
+          <button class="btn btn-yes" id="btnYes" type="button">Yes</button>
+          <button class="btn btn-no" id="btnAbsolutely" type="button">Absolutely</button>
+        </div>
+        <div class="sparkles" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </section>
+
+      <section class="panel panel-card" id="panelCard" aria-hidden="true">
+        <div class="heart-burst" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span>
+        </div>
+        <h2>Happy Valentine’s Day!</h2>
+        <p class="message" id="valentineMessage">
+          I know that today is important to you, and I want you to know that you are very important to me. I know I don’t say it enough as much as I try to show you, but I love you so much. You are my girlfriend, and my best friend. I am so grateful to have you in my life, and I can’t wait to spend many more Valentine’s Days together. I love you.
+        </p>
+        <button class="btn btn-yes" id="btnBack" type="button">Back</button>
+      </section>
+    </main>
+
+    <script>
+      const card = document.getElementById("card");
+      const panelQuestion = document.getElementById("panelQuestion");
+      const panelCard = document.getElementById("panelCard");
+      const btnYes = document.getElementById("btnYes");
+      const btnAbsolutely = document.getElementById("btnAbsolutely");
+      const btnBack = document.getElementById("btnBack");
+      const bgMusic = document.getElementById("bgMusic");
+      const musicOverlay = document.getElementById("musicOverlay");
+
+      const startMusic = () => {
+        if (!bgMusic) return;
+        bgMusic.volume = 0.4;
+        bgMusic.play().then(() => {
+          if (musicOverlay) musicOverlay.classList.add("hidden");
+        }).catch(() => {
+          if (musicOverlay) musicOverlay.classList.remove("hidden");
+        });
+      };
+
+      const showCard = () => {
+        card.classList.add("show-card");
+        panelCard.setAttribute("aria-hidden", "false");
+        panelQuestion.setAttribute("aria-hidden", "true");
+      };
+
+      const showQuestion = () => {
+        card.classList.remove("show-card");
+        panelCard.setAttribute("aria-hidden", "true");
+        panelQuestion.setAttribute("aria-hidden", "false");
+      };
+
+      btnYes.addEventListener("click", () => {
+        startMusic();
+        showCard();
+      });
+      btnAbsolutely.addEventListener("click", () => {
+        startMusic();
+        showCard();
+      });
+      btnBack.addEventListener("click", () => {
+        startMusic();
+        showQuestion();
+      });
+
+      window.addEventListener("load", startMusic);
+
+      if (musicOverlay) {
+        musicOverlay.addEventListener("click", () => {
+          startMusic();
+        });
+      }
+    </script>
+  </body>
+</html>

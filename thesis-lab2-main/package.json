@@ -1,0 +1,13 @@
+{
+  "name": "ask-valentine",
+  "version": "1.0.0",
+  "description": "Valentine-themed Express site",
+  "main": "app.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
